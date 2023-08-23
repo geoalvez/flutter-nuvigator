@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuvigator/next.dart';
 import 'package:proj/components/orgs_highlights_card.dart';
 import 'package:proj/components/orgs_cards_list.dart';
 import 'package:proj/components/orgs_search_bar.dart';
@@ -135,14 +136,15 @@ class _HomeScreenState extends State<HomeScreen> {
     final data = await Data.getJson();
     final producers = data["producers"];
 
+    final nuvigator = Nuvigator.of(context);
+
     for(final producer in producers.keys) {
 
       final prod = Producer.fromJson(producers[producer]);
 
       children.add(OrgsStoresCard(
-        action: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ProducerDetailsScreen(producer: prod)),
+        action: () => nuvigator.open('producer-details', parameters:
+          {"producer": prod}
         ),
         img: prod.logo,
         distance: prod.distance,
