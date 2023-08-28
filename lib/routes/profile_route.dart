@@ -6,7 +6,10 @@ import 'package:proj/screens/profile_screen.dart';
 class ProfileRouter extends NuRoute{
   @override
   Widget build(BuildContext context, NuRouteSettings<Object> settings) {
-    return ProfileScreen();
+    print("Parametro recebido ${settings.rawParameters['name']}");
+    return ProfileScreen(
+      onClose: () => nuvigator.pop('Olá, eu sou um retorno de parâmetro! O nome é ${settings.rawParameters['name']}'),
+    );
   }
 
   @override
